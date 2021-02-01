@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Install dependencies
-        run: composer update
+        run: composer update --ignore-platform-req=php
 
       - name: Update cucumber
         run: bin/update_cucumber
