@@ -50,3 +50,7 @@ $newJson = str_replace(
 file_put_contents($composerFile, $newJson);
 
 echo "Updated composer config:\n$newJson";
+
+passthru(__DIR__ . '/update_i18n');
+
+echo "Updated translations\n";
