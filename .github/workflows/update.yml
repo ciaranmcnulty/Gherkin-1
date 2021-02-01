@@ -18,4 +18,16 @@ jobs:
         run: composer update --ignore-platform-req=php
 
       - name: Update cucumber
-        run: git config --global user.email "mail@ciaranmcnulty.com" && git config --global user.name "Ciaran McNulty" && bin/update_cucumber
+        run: bin/update_cucumber
+
+      - name: Update translations
+        run: bin/update_i18n
+
+      - name: Open a PR
+        uses: peter-evans/create-pull-request@v3
+        with:
+          commit-message: "Cucumber tag update"
+          branch: 'cucumber-update'
+          delete-branch: true
+          title: 'Cucumber update'
+          base: 'master'
