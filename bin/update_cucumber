@@ -50,3 +50,35 @@ $newJson = str_replace(
 file_put_contents($composerFile, $newJson);
 
 echo "Updated composer config:\n$newJson";
+
+passthru(__DIR__ . '/update_i18n');
+
+echo "Updated translations\n";
+
+$changedFiles = explode("\n", (shell_exec("git diff --name-only")));
+$committable = array_intersect(['composer.json', 'i18n.php'], $changedFiles);
+
+if (!$committable) {
+    echo "Key files are not modified, not sure why\n";
+    exit(1);
+}
+
+$gitAdd = implode(' ', $committable);
+exec(
+    "git checkout -b cucumber-update && "
+    ."git add $gitAdd && "
+    ."git commit -m 'Update cucumber to $newTag' && "
+    ."git push origin cucumber-update && "
+    ."gh pr create --title 'Update to cucumber $newTag' --body 'Created by bin/update_cucumber'",
+    $output,
+    $result
+);
+
+if ($result) {
+    echo "Created PR\n";
+}
+else {
+    echo "Error creating PR\n";
+}
+
+exit($result);
