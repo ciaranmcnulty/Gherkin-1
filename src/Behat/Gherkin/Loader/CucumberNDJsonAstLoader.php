@@ -112,7 +112,7 @@ class CucumberNDJsonAstLoader implements LoaderInterface
     /**
      * @return BackgroundNode|null
      */
-    private static function getBackground($json)
+    private static function getBackground(array $json)
     {
         $backgrounds = array_values(
             array_map(
