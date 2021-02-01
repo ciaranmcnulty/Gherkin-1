@@ -23,7 +23,7 @@ class CucumberNDJsonAstLoader implements LoaderInterface
 
     public function load($resource)
     {
-        return array_values(array_map(
+        return array_filter(array_map(
             static function ($line) use ($resource) {
                 return self::getFeature(json_decode($line, true), $resource);
             },
