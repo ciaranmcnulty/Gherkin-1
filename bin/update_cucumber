@@ -75,10 +75,10 @@ exec(
 );
 
 if ($result) {
-    echo "Created PR\n";
+    echo "Error creating PR\n";
 }
 else {
-    echo "Error creating PR\n";
+    echo "Created PR\n";
 }
 
 exit($result);
