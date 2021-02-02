@@ -1,4 +1,4 @@
-name: Update Composer
+name: Update Cucumber
 
 on:
   schedule:
