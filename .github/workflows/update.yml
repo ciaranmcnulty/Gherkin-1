@@ -18,6 +18,7 @@ jobs:
         run: composer update --ignore-platform-req=php
 
       - name: Update cucumber
+        id: cucumber
         run: bin/update_cucumber
 
       - name: Update translations
@@ -26,8 +27,8 @@ jobs:
       - name: Open a PR
         uses: peter-evans/create-pull-request@v3
         with:
-          commit-message: "Cucumber tag update"
-          branch: 'cucumber-update'
+          commit-message: Automatic Cucumber tag update to ${{ steps.cucumber.outputs.cucumber_version }}
+          branch: cucumber-update-${{ steps.cucumber.outputs.cucumber_version }}
           delete-branch: true
-          title: 'Cucumber update'
+          title: Cucumber update ${{ steps.cucumber.outputs.cucumber_version }}
           base: 'master'
